@@ -1,6 +1,6 @@
 import { create as createSubject } from '@liquid-bricks/lib-nats-subject/create/basic'
 import { ackMessage, decodeData } from '../middleware.js'
-import { Codes } from '../../codes.js'
+import { PRECONDITION_REQUIRED } from '@liquid-bricks/lib-diagnostics/codes'
 
 import { events as natsEvents } from '@liquid-bricks/lib-nats-subject/events/nats'
 
@@ -35,7 +35,7 @@ function handler({
 
   diagnostics.require(
     found,
-    Codes.PRECONDITION_REQUIRED,
+    PRECONDITION_REQUIRED,
     'No component provider registered for requested hash',
     { componentHash },
   )

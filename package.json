@@ -9,7 +9,6 @@
     "./router": "./src/index.js"
   },
   "files": [
-    "codes.js",
     "src"
   ],
   "sideEffects": false,
@@ -17,6 +16,7 @@
     "test": "node --test \"test/**/*.mjs\""
   },
   "dependencies": {
+    "@liquid-bricks/lib-diagnostics": "github:LiquidBricks/lib-diagnostics#2eb9d8e992f1fa656386877c8ff65adbdd2f651e",
     "@liquid-bricks/lib-nats-subject": "github:LiquidBricks/lib-nats-subject#c79bce410616813500814e598afeeaea5ebe3216"
   },
   "license": "ISC"

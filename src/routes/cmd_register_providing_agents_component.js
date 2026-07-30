@@ -1,5 +1,5 @@
 import { ackMessage, decodeData } from '../middleware.js'
-import { Codes } from '../../codes.js'
+import { PRECONDITION_REQUIRED } from '@liquid-bricks/lib-diagnostics/codes'
 import { create as createSubject } from '@liquid-bricks/lib-nats-subject/create/basic'
 import { events as natsEvents } from '@liquid-bricks/lib-nats-subject/events/nats'
 
@@ -23,13 +23,13 @@ function registerProvidingAgentsComponent({
 }) {
   diagnostics.require(
     typeof agentID === 'string' && agentID.length,
-    Codes.PRECONDITION_REQUIRED,
+    PRECONDITION_REQUIRED,
     'agentID is required for provider registration',
     { field: 'agentID' },
   )
   diagnostics.require(
     typeof hash === 'string' && hash.length,
-    Codes.PRECONDITION_REQUIRED,
+    PRECONDITION_REQUIRED,
     'Component hash is required for provider registration',
     { field: 'hash', agentID },
   )
@@ -37,7 +37,7 @@ function registerProvidingAgentsComponent({
   const connection = connectionRegistry.get(agentID)
   diagnostics.require(
     connection,
-    Codes.PRECONDITION_REQUIRED,
+    PRECONDITION_REQUIRED,
     'Connection missing for provider registration',
     { agentID, hash },
   )

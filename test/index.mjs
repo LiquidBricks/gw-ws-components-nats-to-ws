@@ -1,7 +1,7 @@
 import test from 'node:test'
 import assert from 'node:assert/strict'
 
-import { Codes } from '../codes.js'
+import { PRECONDITION_REQUIRED } from '@liquid-bricks/lib-diagnostics/codes'
 import { createNatsIngressRouter } from '../src/index.js'
 import { spec as cmdRegisterProvidingAgentsComponentSpec } from '../src/routes/cmd_register_providing_agents_component.js'
 import { spec as computeFunctionSpec } from '../src/routes/compute_function.js'
@@ -129,7 +129,7 @@ test('router diagnoses a missing compute_function provider without secondary war
 
   assert.ok(
     diagnostics.calls.require.some((call) => (
-      call.code === Codes.PRECONDITION_REQUIRED &&
+      call.code === PRECONDITION_REQUIRED &&
       call.message === 'No component provider registered for requested hash'
     )),
   )
@@ -151,7 +151,7 @@ test('compute_function validation fails when no provider has the requested hash'
     }),
     (error) => (
       error instanceof diagnostics.DiagnosticError &&
-      error.code === Codes.PRECONDITION_REQUIRED
+      error.code === PRECONDITION_REQUIRED
     ),
   )
 })

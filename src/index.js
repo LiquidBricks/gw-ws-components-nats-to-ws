@@ -1,7 +1,10 @@
 import router from "@liquid-bricks/lib-nats-subject/router";
+import {
+  ROUTER_HANDLER_ERROR,
+  ROUTER_UNKNOWN_SUBJECT,
+} from '@liquid-bricks/lib-diagnostics/codes'
 import { path as computeFunctionPath, spec as computeFunctionSpec } from './routes/compute_function.js'
 import { path as cmdRegisterProvidingAgentsComponentPath, spec as cmdRegisterProvidingAgentsComponentSpec } from './routes/cmd_register_providing_agents_component.js'
-import { Codes } from '../codes.js'
 
 export const routes = [
   [computeFunctionPath, computeFunctionSpec],
@@ -22,7 +25,7 @@ export function createNatsIngressRouter({
       handler: async ({ message, rootCtx: { diagnostics } }) => {
         diagnostics.invariant(
           message.term(`No handler for subject: ${message.subject}`) ?? false,
-          Codes.ROUTER_UNKNOWN_SUBJECT,
+          ROUTER_UNKNOWN_SUBJECT,
           `No handler for subject: ${message.subject}`,
           { subject: message.subject, message: message?.json?.() }
         )
@@ -33,7 +36,7 @@ export function createNatsIngressRouter({
         return
       }
       throw diagnostics.error(
-        Codes.ROUTER_HANDLER_ERROR,
+        ROUTER_HANDLER_ERROR,
         'gw-ws-components router error',
         { error, rest },
       )
