@@ -16,8 +16,8 @@
     "test": "node --test \"test/**/*.mjs\""
   },
   "dependencies": {
-    "@liquid-bricks/lib-diagnostics": "github:LiquidBricks/lib-diagnostics#c55d79973df6a7d7255a0cb521aa8a3dc5182199",
-    "@liquid-bricks/lib-nats-subject": "github:LiquidBricks/lib-nats-subject#96c18b90fb7026ffda49ed82f8c367cecc8cecbc"
+    "@liquid-bricks/lib-diagnostics": "file:../lib-diagnostics",
+    "@liquid-bricks/lib-nats-subject": "file:../lib-nats-subject"
   },
   "license": "ISC"
 }
